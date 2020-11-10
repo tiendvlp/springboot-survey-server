@@ -23,7 +23,6 @@ public class AuthServiceInterceptor implements HandlerInterceptor {
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
                 .setAudience(Collections.singletonList("779260072081-g9ht0cn5jn8abkq76jl8p763njoe1ucl.apps.googleusercontent.com"))
                 .build();
-
         GoogleIdToken idToken = null;
         String idTokenString = request.getHeader("Authorization").split(" ")[1];
         idToken = verifier.verify(idTokenString);
@@ -100,3 +99,52 @@ public class AuthServiceInterceptor implements HandlerInterceptor {
         return result;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
