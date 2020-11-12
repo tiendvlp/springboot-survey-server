@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RequestMapping("/api/v1/")
 @RestController()
 public class RootController {
 
@@ -18,8 +17,8 @@ public class RootController {
 
 
     @GetMapping()
-    public ResponseEntity<String> getAllQuestionInSurvey () {
-        return new ResponseEntity("Server is alive", HttpStatus.OK);
+    public String getAllQuestionInSurvey () {
+        return "Server is alive";
     }
 
 }
