@@ -2,6 +2,8 @@ package com.devlogs.apolo.osg.dao;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SurveyResultDao {
 
@@ -14,9 +16,9 @@ public interface SurveyResultDao {
         private String campus;
         private int admission;
         private String surveyId;
-        private int[] answer;
+        private List<Integer> answer;
 
-        public SurveyResult(String ownerEmail, String ownerName, String ownerPictureUrl, String campus, int admission, String surveyId, int[] answer) {
+        public SurveyResult(String ownerEmail, String ownerName, String ownerPictureUrl, String campus, int admission, String surveyId, List<Integer> answer) {
             this.ownerEmail = ownerEmail;
             this.ownerName = ownerName;
             this.ownerPictureUrl = ownerPictureUrl;
@@ -50,7 +52,7 @@ public interface SurveyResultDao {
             return surveyId;
         }
 
-        public int[] getAnswer() {
+        public List<Integer> getAnswer() {
             return answer;
         }
 

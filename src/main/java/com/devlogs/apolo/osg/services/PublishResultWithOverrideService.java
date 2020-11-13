@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PublishResultWithOverrideService {
     private SurveyResultDao mSurveyResultDao;
@@ -16,7 +18,7 @@ public class PublishResultWithOverrideService {
         mSurveyResultDao = dao;
     }
 
-    public int execute (String ownerEmail, String ownerName,String pictureUrl, String campus, int admission, String surveyId, int[] answer) {
+    public int execute (String ownerEmail, String ownerName,String pictureUrl, String campus, int admission, String surveyId, List<Integer> answer) {
         if (mGetSurveyByIdService.execute(surveyId) == null) {
             return 0;
         }

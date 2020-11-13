@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RequestMapping("/api/v1/survey/result")
 @RestController
@@ -64,9 +65,9 @@ public class SurveyResultController {
 
     public static class PublishResultReqBody {
         private String surveyId;
-        private int[] answer;
+        private List<Integer> answer;
 
-        public PublishResultReqBody(String surveyId, int[] answer) {
+        public PublishResultReqBody(String surveyId, List<Integer> answer) {
             this.surveyId = surveyId;
             this.answer = answer;
         }
@@ -75,7 +76,7 @@ public class SurveyResultController {
             return surveyId;
         }
 
-        public int[] getAnswer() {
+        public List<Integer> getAnswer() {
             return answer;
         }
     }
