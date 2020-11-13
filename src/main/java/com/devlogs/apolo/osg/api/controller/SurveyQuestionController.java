@@ -21,8 +21,7 @@ public class SurveyQuestionController {
         mGetQuestionsService = getQuestionInSurveyService;
     }
 
-
-        @GetMapping("allquestioninsurvey")
+    @GetMapping("allquestioninsurvey")
     public ResponseEntity<List<SurveyQuestionEntity>> getAllQuestionInSurvey (@RequestParam("surveyId") String surveyId) {
         return new ResponseEntity(mGetQuestionsService.execute(surveyId), HttpStatus.OK);
     }

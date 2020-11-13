@@ -22,7 +22,7 @@ public class SurveyResultController {
     }
 
     @PostMapping("/publishresult")
-    public ResponseEntity publishResult (@RequestBody PublishResultReqBody reqBody, HttpServletRequest request) {
+    public ResponseEntity<PublishSurveyResultRespondModel> publishResult (@RequestBody PublishResultReqBody reqBody, HttpServletRequest request) {
         String ownerEmail = (String) request.getAttribute("userEmail");
         String ownerName = (String) request.getAttribute("userName");
         String campus = (String) request.getAttribute("campus");
@@ -30,13 +30,36 @@ public class SurveyResultController {
         String pictureUrl = (String) request.getAttribute("pictureUrl");
 
         if (mPublishResultService.execute(ownerEmail, ownerName, pictureUrl, campus, admission, reqBody.surveyId, reqBody.answer) == 1) {
-            return new ResponseEntity(new Object() {
-                public String message = "Publish Success";
-            }, HttpStatus.OK);
+            return new ResponseEntity(new PublishSurveyResultRespondModel("", true), HttpStatus.OK);
         }
-        return new ResponseEntity(new Object() {
-           public String message = "Publish failed";
-        }, HttpStatus.resolve(400));
+        return new ResponseEntity(new PublishSurveyResultRespondModel("", true), HttpStatus.resolve(400));
+    }
+
+
+    public static class PublishSurveyResultRespondModel {
+        String surveyResultId;
+        Boolean isSuccess;
+
+        public PublishSurveyResultRespondModel(String surveyResultId, Boolean isSuccess) {
+            this.surveyResultId = surveyResultId;
+            this.isSuccess = isSuccess;
+        }
+
+        public String getSurveyResultId() {
+            return surveyResultId;
+        }
+
+        public void setSurveyResultId(String surveyResultId) {
+            this.surveyResultId = surveyResultId;
+        }
+
+        public Boolean getSuccess() {
+            return isSuccess;
+        }
+
+        public void setSuccess(Boolean success) {
+            isSuccess = success;
+        }
     }
 
     public static class PublishResultReqBody {
