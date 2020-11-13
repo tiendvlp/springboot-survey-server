@@ -32,7 +32,7 @@ public class SurveyResultController {
         if (mPublishResultService.execute(ownerEmail, ownerName, pictureUrl, campus, admission, reqBody.surveyId, reqBody.answer) == 1) {
             return new ResponseEntity(new PublishSurveyResultRespondModel("", true), HttpStatus.OK);
         }
-        return new ResponseEntity(new PublishSurveyResultRespondModel("", true), HttpStatus.resolve(400));
+        return new ResponseEntity(new PublishSurveyResultRespondModel("", false), HttpStatus.resolve(400));
     }
 
 
