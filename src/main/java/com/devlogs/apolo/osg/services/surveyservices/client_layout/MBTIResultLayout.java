@@ -41,7 +41,7 @@ public class MBTIResultLayout {
                 public final String layout_width =  "match_parent";
                 public final String layout_height = "wrap_content";
                 public final String type = "TextView";
-                public final String text = "$resultDetail/result";
+                public final String text = "$resultDetail.result";
                 public final String textColor = "#D14555";
                 public final String textSize = "26sp";
                 public final String textAlignment = "center";
@@ -50,7 +50,7 @@ public class MBTIResultLayout {
                 public final String layout_width =  "match_parent";
                 public final String layout_height = "wrap_content";
                 public final String type = "TextView";
-                public final String text = "$resultDetail/description";
+                public final String text = "$resultDetail.description";
                 public final String textColor = "#000000";
                 public final String textSize = "13sp";
                 public final String paddindTop = "10dp";
