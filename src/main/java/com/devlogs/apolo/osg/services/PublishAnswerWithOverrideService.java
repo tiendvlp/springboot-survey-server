@@ -1,6 +1,6 @@
 package com.devlogs.apolo.osg.services;
 
-import com.devlogs.apolo.osg.dao.SurveyResultDao;
+import com.devlogs.apolo.osg.dao.SurveyAnswerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -8,21 +8,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PublishResultWithOverrideService {
-    private SurveyResultDao mSurveyResultDao;
+public class PublishAnswerWithOverrideService {
+    private SurveyAnswerDao mSurveyAnswerDao;
     private GetSurveyByIdService mGetSurveyByIdService;
 
     @Autowired
-    PublishResultWithOverrideService (@Qualifier("MongoSurveyResultDaoImp") SurveyResultDao dao, GetSurveyByIdService getSurveyByIdService) {
+    PublishAnswerWithOverrideService(@Qualifier("MongoSurveyAnswerDaoImp") SurveyAnswerDao dao, GetSurveyByIdService getSurveyByIdService) {
         mGetSurveyByIdService = getSurveyByIdService;
-        mSurveyResultDao = dao;
+        mSurveyAnswerDao = dao;
     }
 
     public int execute (String ownerEmail, String ownerName,String pictureUrl, String campus, int admission, String surveyId, List<Integer> answer) {
         if (mGetSurveyByIdService.execute(surveyId) == null) {
             return 0;
         }
-        mSurveyResultDao.removeSurveyResult(ownerEmail, surveyId);
-        return mSurveyResultDao.insertNewResult(new SurveyResultDao.SurveyResult(ownerEmail, ownerName,pictureUrl, campus, admission, surveyId, answer));
+        mSurveyAnswerDao.removeSurveyResult(ownerEmail, surveyId);
+        return mSurveyAnswerDao.insertNewResult(new SurveyAnswerDao.SurveyResult(ownerEmail, ownerName,pictureUrl, campus, admission, surveyId, answer));
     }
 }

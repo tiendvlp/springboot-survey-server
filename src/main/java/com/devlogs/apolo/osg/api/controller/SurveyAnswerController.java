@@ -1,25 +1,30 @@
 package com.devlogs.apolo.osg.api.controller;
 
-import com.devlogs.apolo.osg.services.PublishResultWithOverrideService;
+import com.devlogs.apolo.osg.services.GetSurveyResultService;
+import com.devlogs.apolo.osg.services.PublishAnswerWithOverrideService;
+import com.devlogs.apolo.osg.services.SaveSurveyResultService;
+import com.devlogs.apolo.osg.services.surveyservices.MBTIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequestMapping("/api/v1/survey/result")
 @RestController
-public class SurveyResultController {
-    private PublishResultWithOverrideService mPublishResultService;
+public class SurveyAnswerController {
+    private PublishAnswerWithOverrideService mPublishResultService;
+    private SaveSurveyResultService mSaveSurveyResultService;
+    private GetSurveyResultService getSurveyResultService;
+    private MBTIService mbtiService =  new MBTIService();
 
     @Autowired
-    SurveyResultController (PublishResultWithOverrideService publishResult) {
+    SurveyAnswerController(PublishAnswerWithOverrideService publishResult,GetSurveyResultService getSurveyResultService, SaveSurveyResultService saveSurveyResultService) {
         mPublishResultService = publishResult;
+        this.getSurveyResultService = getSurveyResultService;
+        mSaveSurveyResultService = saveSurveyResultService;
     }
 
     @PostMapping("/publishresult")
@@ -31,11 +36,20 @@ public class SurveyResultController {
         String pictureUrl = (String) request.getAttribute("pictureUrl");
 
         if (mPublishResultService.execute(ownerEmail, ownerName, pictureUrl, campus, admission, reqBody.surveyId, reqBody.answer) == 1) {
+            String surveyResultId = "";
+            // equal MBIT.id
+            if (reqBody.surveyId.equals("9121dev92log")) {
+                surveyResultId = mSaveSurveyResultService.execute(reqBody.surveyId, ownerEmail, mbtiService.execute());
+
+                if (surveyResultId.isEmpty()) {
+                    return new ResponseEntity(new PublishSurveyResultRespondModel("", false), HttpStatus.resolve(400));
+                }
+                return new ResponseEntity(new PublishSurveyResultRespondModel(surveyResultId, true), HttpStatus.OK);
+            }
             return new ResponseEntity(new PublishSurveyResultRespondModel("", true), HttpStatus.OK);
         }
         return new ResponseEntity(new PublishSurveyResultRespondModel("", false), HttpStatus.resolve(400));
     }
-
 
     public static class PublishSurveyResultRespondModel {
         String surveyResultId;
