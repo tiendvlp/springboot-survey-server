@@ -21,8 +21,8 @@ public class SurveyResultV2Controller {
     }
 
 
-    @GetMapping("/getResult/{id}")
-    public ResponseEntity<GetSurveyResultRes> getSurveyResult(@PathVariable("id") String id) {
+    @GetMapping("/getResult")
+    public ResponseEntity<GetSurveyResultRes> getSurveyResult(@RequestParam("id") String id) {
         SurveyResultEntity result = getSurveyResultService.execute(id);
         Object layout = null;
         if (result.getSurveyId().equals("9121dev92log")) {
