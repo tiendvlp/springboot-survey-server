@@ -15,10 +15,10 @@ public class MemorySurveyDaoImp implements SurveyDao {
 
     MemorySurveyDaoImp() {
         SurveyMbtiSpawn mbti = new SurveyMbtiSpawn();
-        SurveyDASS21Spawn dass = new SurveyDASS21Spawn();
-        SurveyHealthSpawn health = new SurveyHealthSpawn();
-        SevenElevenSurveySpawn sevenEleven = new SevenElevenSurveySpawn();
-        FacilitiesSurveySpawn facilitiesSurveySpawn = new FacilitiesSurveySpawn();
+        SociologyJobQuestionSpawn dass = new SociologyJobQuestionSpawn();
+        ManagementJobQuestionSpawn health = new ManagementJobQuestionSpawn();
+        TechJobQuestionSpawn sevenEleven = new TechJobQuestionSpawn();
+        ResearchJobQuestionSpawn facilitiesSurveySpawn = new ResearchJobQuestionSpawn();
 
         surveys.add(new Survey(mbti.id, mbti.name, mbti.desciption, mbti.topicId, mbti.questions.length));
         surveys.add(new Survey(dass.id, dass.name, dass.description, dass.topicId, dass.questions.length));
