@@ -19,26 +19,26 @@ public class MemorySurveyQuestionDaoImp implements SurveyQuestionDao{
             db.add(new SurveyQuestion(i+"", mbti.questions[i].question, mbti.questions[i].answers, mbti.id));
         }
 
-        SurveyDASS21Spawn dass = new SurveyDASS21Spawn();
+        SociologyJobQuestionSpawn dass = new SociologyJobQuestionSpawn();
 
         for (int i = 0; i < dass.questions.length; i++) {
             db.add(new SurveyQuestion((i + mbti.questions.length)+"", dass.questions[i].question, dass.questions[i].answers, dass.id));
         }
 
-        SurveyHealthSpawn health = new SurveyHealthSpawn();
+        ManagementJobQuestionSpawn health = new ManagementJobQuestionSpawn();
 
         for (int i = 0; i < health.questions.length; i++) {
             db.add(new SurveyQuestion((i + dass.questions.length)+"", health.questions[i].question, health.questions[i].answers, health.id));
         }
 
-        FacilitiesSurveySpawn facilities = new FacilitiesSurveySpawn();
+        ResearchJobQuestionSpawn facilities = new ResearchJobQuestionSpawn();
 
         for (int i = 0; i < facilities.questions.length; i++) {
             db.add(new SurveyQuestion((i + health.questions.length)+"", facilities.questions[i].question, facilities.questions[i].answers, facilities.id));
         }
 
 
-        SevenElevenSurveySpawn sevenEleven = new SevenElevenSurveySpawn();
+        TechJobQuestionSpawn sevenEleven = new TechJobQuestionSpawn();
 
         for (int i = 0; i < sevenEleven.questions.length; i++) {
             db.add(new SurveyQuestion((i + facilities.questions.length)+"", sevenEleven.questions[i].question, sevenEleven.questions[i].answers, sevenEleven.id));
